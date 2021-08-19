@@ -11,22 +11,43 @@ import org.springframework.stereotype.Service;
 class ShakyBusinessService {
 
   @Recover
-  int deriveNumberFallback(ShakyBusinessException ex) {
-    log.info("Entered deriveNumberFallback method");
-    return 2;
+  String retryableMethodFallback(ShakyBusinessException ex) {
+    log.info("Entered retryableMethodFallback method");
+    return "fallback response";
   }
 
   @Retryable(include = ShakyBusinessException.class)
-  int deriveNumber() throws Exception {
+  String retryableMethod() throws Exception {
 
-    log.info("Entered deriveNumber method");
+    log.info("Entered retryableMethod method");
 
     if (Math.random() > 0.5) {
-      log.info("Entered deriveNumber failure condition");
+      log.info("Entered retryableMethod failure condition");
       Thread.sleep(3000);
       throw new ShakyBusinessException("Crash!");
     }
 
-    return 1;
+    return "standard response";
   }
+
+  @Recover
+  String circuitBreakerMethodFallback(ShakyBusinessException ex) {
+    log.info("Entered circuitBreakerMethodFallback method");
+    return "fallback response";
+  }
+
+  @CircuitBreaker(include = ShakyBusinessException.class, maxAttempts = 1)
+  String circuitBreakerMethod() throws Exception {
+
+    log.info("Entered circuitBreakerMethod method");
+
+    if (Math.random() > 0.5) {
+      log.info("Entered circuitBreakerMethod failure condition");
+      Thread.sleep(3000);
+      throw new ShakyBusinessException("Crash!");
+    }
+
+    return "standard response";
+  }
+
 }
