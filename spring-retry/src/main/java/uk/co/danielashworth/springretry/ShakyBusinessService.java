@@ -11,29 +11,22 @@ import org.springframework.stereotype.Service;
 class ShakyBusinessService {
 
   @Recover
-  String retryableMethodFallback(ShakyBusinessException ex) {
-    log.info("Entered retryableMethodFallback method");
+  String fallbackMethod(ShakyBusinessException ex) {
+    log.info("Entered fallbackMethod method");
     return "fallback response";
   }
 
-  @Retryable(include = ShakyBusinessException.class)
+  @Retryable(include = ShakyBusinessException.class, maxAttempts = 2)
   String retryableMethod() throws Exception {
 
     log.info("Entered retryableMethod method");
 
-    if (Math.random() > 0.5) {
+    if (hasRequestFailed()) {
       log.info("Entered retryableMethod failure condition");
-      Thread.sleep(3000);
-      throw new ShakyBusinessException("Crash!");
+      triggerShakyBusinessException();
     }
 
     return "standard response";
-  }
-
-  @Recover
-  String circuitBreakerMethodFallback(ShakyBusinessException ex) {
-    log.info("Entered circuitBreakerMethodFallback method");
-    return "fallback response";
   }
 
   @CircuitBreaker(include = ShakyBusinessException.class, maxAttempts = 1)
@@ -41,13 +34,22 @@ class ShakyBusinessService {
 
     log.info("Entered circuitBreakerMethod method");
 
-    if (Math.random() > 0.5) {
+    if (hasRequestFailed()) {
       log.info("Entered circuitBreakerMethod failure condition");
-      Thread.sleep(3000);
-      throw new ShakyBusinessException("Crash!");
+      triggerShakyBusinessException();
     }
 
     return "standard response";
+  }
+
+  private boolean hasRequestFailed() {
+    return Math.random() > 0.5;
+  }
+
+  private void triggerShakyBusinessException() throws Exception {
+    // sleep thread to mimic a request to a third party service
+    Thread.sleep(3000);
+    throw new ShakyBusinessException("ShakyBusinessException!");
   }
 
 }
