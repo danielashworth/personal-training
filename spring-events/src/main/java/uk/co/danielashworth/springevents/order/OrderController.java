@@ -1,4 +1,4 @@
-package uk.co.danielashworth.springeventdemo.order;
+package uk.co.danielashworth.springevents.order;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

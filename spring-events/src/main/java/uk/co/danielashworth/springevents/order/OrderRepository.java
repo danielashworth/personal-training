@@ -1,4 +1,4 @@
-package uk.co.danielashworth.springeventdemo.order;
+package uk.co.danielashworth.springevents.order;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

@@ -1,28 +1,28 @@
-package uk.co.danielashworth.springeventdemo.email;
+package uk.co.danielashworth.springevents.email;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-import uk.co.danielashworth.springeventdemo.order.OrderDelayedEvent;
+import uk.co.danielashworth.springevents.order.OrderCompleteEvent;
 
 @Component
 @Slf4j
-class OrderDelayEventListener {
+class OrderCompleteEventListener {
 
   private final CustomerEmailService customerEmailService;
 
   @Autowired
-  OrderDelayEventListener(CustomerEmailService customerEmailService) {
+  OrderCompleteEventListener(CustomerEmailService customerEmailService) {
     this.customerEmailService = customerEmailService;
   }
 
   @EventListener
-  public void onOrderDelay(OrderDelayedEvent event) {
+  public void onOrderComplete(OrderCompleteEvent event) {
     log.info(String.format(
-        "Received OrderDelayedEvent for order - %s",
+        "Received OrderCompleteEvent for order - %s",
         event.getOrder().toString()
     ));
-    customerEmailService.sendOrderDelayedEmail(event.getOrder());
+    customerEmailService.sendOrderCompleteEmail(event.getOrder());
   }
 }

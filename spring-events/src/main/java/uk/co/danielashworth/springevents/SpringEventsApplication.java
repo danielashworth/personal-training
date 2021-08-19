@@ -1,12 +1,12 @@
-package uk.co.danielashworth.springeventdemo;
+package uk.co.danielashworth.springevents;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringEventDemoApplication {
+public class SpringEventsApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(SpringEventDemoApplication.class, args);
+		SpringApplication.run(SpringEventsApplication.class, args);
 	}
 
 }

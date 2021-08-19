@@ -1,10 +1,10 @@
-package uk.co.danielashworth.springeventdemo;
+package uk.co.danielashworth.springevents;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringEventDemoApplicationTests {
+class SpringEventsApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -15,6 +15,7 @@
 
 	<modules>
 		<module>spring-events</module>
+		<module>spring-retry</module>
 	</modules>
 
 	<parent>

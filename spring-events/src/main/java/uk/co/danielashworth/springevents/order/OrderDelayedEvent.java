@@ -1,4 +1,4 @@
-package uk.co.danielashworth.springeventdemo.order;
+package uk.co.danielashworth.springevents.order;
 
 public class OrderDelayedEvent extends AbstractOrderEvent {
 

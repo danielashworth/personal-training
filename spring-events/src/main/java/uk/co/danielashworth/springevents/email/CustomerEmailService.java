@@ -1,8 +1,8 @@
-package uk.co.danielashworth.springeventdemo.email;
+package uk.co.danielashworth.springevents.email;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import uk.co.danielashworth.springeventdemo.order.Order;
+import uk.co.danielashworth.springevents.order.Order;
 
 @Service
 @Slf4j
