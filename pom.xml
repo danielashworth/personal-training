@@ -16,7 +16,8 @@
 	<modules>
 		<module>spring-events</module>
 		<module>spring-retry</module>
-	</modules>
+        <module>spring-cache</module>
+    </modules>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
